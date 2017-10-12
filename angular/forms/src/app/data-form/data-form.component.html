@@ -1,0 +1,94 @@
+<h5>
+  Template Form
+</h5>
+<form [formGroup]="formulary" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+      <label class="col-form-label" for="name">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name"
+        aria-describedby="nameHelp"  placeholder="Enter name" [ngClass]="isFieldValid('name')" >
+      <div *ngIf="isInvalidAndTouched('name')"  class="invalid-feedback">
+        Name is required.
+      </div>
+  </div>
+
+  <div class="form-group">
+      <label class="col-form-label" for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" formControlName="email"
+        aria-describedby="emailHelp" placeholder="Enter e-mail" [ngClass]="isFieldValid('email')">
+        <div *ngIf="isInvalidAndTouched('email')"  class="invalid-feedback">
+          Please provide a valid zip
+        </div>
+        <!-- Bootstrap 4 não funcionou desta forma -->
+        <!-- <app-field-control-error
+          [showError]="isInvalidAndTouched('email')"
+          errorMsg="Please provide a valid zip.">
+      </app-field-control-error> -->
+  </div>
+
+  <div formGroupName="address">
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="zip" class="col-form-label">Zip</label>
+          <input type="text" class="form-control" id="zip" [ngClass]="isFieldValid('address.zip')"
+            placeholder="Enter zip" formControlName="zip"
+            (blur)="zipCodeQuery()">
+          <div *ngIf="isInvalidAndTouched('address.zip')"  class="invalid-feedback">
+              Zip is required
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="number" class="col-form-label">Number</label>
+          <input type="text" class="form-control" id="number" [ngClass]="isFieldValid('address.number')"
+            placeholder="Enter number" formControlName="number">
+          <div *ngIf="isInvalidAndTouched('address.number')"  class="invalid-feedback">
+              Number is required
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="complement" class="col-form-label">Address complement</label>
+          <input type="text" class="form-control" id="complement"
+            placeholder="Enter complement" formControlName="complement">
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label class="col-form-label" for="street">Street</label>
+          <input type="address" class="form-control" id="street" [ngClass]="isFieldValid('address.street')"
+            aria-describedby="streetHelp" placeholder="Enter street" formControlName="street">
+          <div *ngIf="isInvalidAndTouched('address.street')"  class="invalid-feedback">
+              Address is required
+          </div>
+      </div>
+
+      <div class="form-row">
+          <div class="form-group col-md-5">
+            <label for="district" class="col-form-label">District</label>
+            <input type="text" class="form-control" id="district" [ngClass]="isFieldValid('address.district')"
+              placeholder="Enter district" formControlName="district">
+            <div *ngIf="isInvalidAndTouched('address.district')"  class="invalid-feedback">
+                District is required
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="city" class="col-form-label">City</label>
+            <input type="text" class="form-control" id="city" [ngClass]="isFieldValid('address.city')"
+              placeholder="Enter city" formControlName="city">
+            <div *ngIf="isInvalidAndTouched('address.city')"  class="invalid-feedback">
+                City is required
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+              <label for="state" class="col-form-label">State</label>
+              <input type="text" class="form-control" id="state" [ngClass]="isFieldValid('address.state')"
+                placeholder="Enter state" formControlName="state">
+              <div *ngIf="isInvalidAndTouched('address.state')"  class="invalid-feedback">
+                  State is required
+              </div>
+            </div>
+      </div>
+    </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn btn-default" (click)="resetForm()">Reset</button>
+  <app-form-debug [form]="formulary"></app-form-debug>
+</form>

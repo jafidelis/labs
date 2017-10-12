@@ -1,0 +1,97 @@
+<h5>
+  Template Form
+</h5>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div class="form-group">
+      <label class="col-form-label" for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" [class.is-invalid]="!name.valid && name.touched"
+        aria-describedby="nameHelp"  placeholder="Enter name" [ngModel]="user.name"
+        required #name="ngModel">
+        <div *ngIf="!name.valid && name.touched"  [class.invalid-feedback]="!name.valid && name.touched" >
+          Name is required
+        </div>
+  </div>
+
+  <div class="form-group">
+      <label class="col-form-label" for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" name="email" [class.is-invalid]="!email.valid && email.touched"
+        aria-describedby="emailHelp" placeholder="Enter e-mail" [ngModel]="user.email"
+        required email #email="ngModel">
+      <div *ngIf="!email.valid && email.touched"  [class.invalid-feedback]="!email.valid && email.touched" >
+          Please provide a valid email
+      </div>
+  </div>
+
+  <div ngModelGroup="address">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="zip" class="col-form-label">Zip</label>
+        <input type="text" class="form-control" id="zip" name="zip"
+          [class.is-invalid]="!zip.valid && zip.touched"
+          placeholder="Enter zip" ngModel #zip="ngModel" required
+          (blur)="zipCodeQuery($event.target.value, f)">
+        <div *ngIf="!zip.valid && zip.touched"  [class.invalid-feedback]="!zip.valid && zip.touched" >
+            Zip is required
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="number" class="col-form-label">Number</label>
+        <input type="text" class="form-control" id="number" name="number"
+          [class.is-invalid]="!number.valid && number.touched"
+          placeholder="Enter number" ngModel #number="ngModel" required>
+        <div *ngIf="!number.valid && number.touched"  [class.invalid-feedback]="!number.valid && number.touched" >
+            Number is required
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="complement" class="col-form-label">Address complement</label>
+        <input type="text" class="form-control" id="complement" name="complement"
+          placeholder="Enter complement" ngModel #complement="ngModel">
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" for="address">Address</label>
+        <input type="address" class="form-control" id="address" name="address" [class.is-invalid]="!address.valid && address.touched"
+          aria-describedby="addressHelp" placeholder="Enter e-mail" ngModel
+          required address #address="ngModel">
+        <div *ngIf="!address.valid && address.touched"  [class.invalid-feedback]="!address.valid && address.touched" >
+            Address is required
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for="district" class="col-form-label">District</label>
+          <input type="text" class="form-control" id="district" name="district"
+            [class.is-invalid]="!district.valid && district.touched"
+            placeholder="Enter district" ngModel #district="ngModel" required>
+          <div *ngIf="!district.valid && district.touched"  [class.invalid-feedback]="!district.valid && district.touched" >
+              District is required
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="city" class="col-form-label">City</label>
+          <input type="text" class="form-control" id="city" name="city"
+            [class.is-invalid]="!city.valid && city.touched"
+            placeholder="Enter city" ngModel #city="ngModel" required>
+          <div *ngIf="!city.valid && city.touched"  [class.invalid-feedback]="!city.valid && city.touched" >
+              City is required
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="state" class="col-form-label">State</label>
+            <input type="text" class="form-control" id="state" name="state"
+              [class.is-invalid]="!state.valid && state.touched"
+              placeholder="Enter state" ngModel #state="ngModel" required>
+            <div *ngIf="!state.valid && state.touched"  [class.invalid-feedback]="!state.valid && state.touched" >
+                State is required
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  <app-form-debug [form]="f"></app-form-debug>
+</form>

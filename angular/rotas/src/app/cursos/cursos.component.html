@@ -1,0 +1,17 @@
+<p>
+  cursos works!
+</p>
+
+<p>page: {{ page }}</p>
+
+<div class="collection">
+  <a class="collection-item"
+    *ngFor="let curso of cursos"
+    [routerLink]="['/cursos', curso.id]">
+    {{curso.name}}
+  </a>
+</div>
+
+<a (click)="nextPage()" class="waves-effect waves-light btn">
+  <i class="material-icons left">cloud</i>next page
+</a>
